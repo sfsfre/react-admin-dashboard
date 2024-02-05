@@ -21,7 +21,7 @@ const Dashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header title="Tableau de bord" subtitle="Bienvenue" />
 
         <Box>
           <Button
@@ -34,7 +34,7 @@ const Dashboard = () => {
             }}
           >
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
+            Télecharger rapport
           </Button>
         </Box>
       </Box>
@@ -56,9 +56,9 @@ const Dashboard = () => {
         >
           <StatBox
             title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
+            subtitle="amal Sent"
+            progress="0.20"
+            increase="+66%"
             icon={
               <EmailIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
