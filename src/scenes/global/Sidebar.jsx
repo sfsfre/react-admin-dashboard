@@ -33,6 +33,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+  const [role,setRole]=useState(false)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -111,13 +112,22 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            {
+              role?<Item
               title="Tableau de bord"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            />:
+             /*tableau de bord restaurant  */
+             
+            <>
+            
+            
+            </>
+            }
+            
 
             <Item
               title="Resto"

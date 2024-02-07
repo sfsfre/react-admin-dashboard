@@ -15,18 +15,19 @@ import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
-import LoginPage from "./auth/LoginUI";
+import LoginForm from './components/LoginForm/LoginForm';
+import RegisterForm from './components/RegisterForm/RegisterForm';
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const isAuthenticated = false;
-  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-  
+
         <div className="app">
           {isAuthenticated ? (
             <>
@@ -46,14 +47,13 @@ function App() {
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/geography" element={<Geography />} />
                   <Route path="/*" element={<Navigate to="/" />} />
+                  <Route path="/register" element={<RegisterForm />} />
+
                 </Routes>
               </main>
             </>
           ) : (
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/*" element={<Navigate to="/login" />} />
-            </Routes>
+            <LoginForm onLogin={() => setIsAuthenticated(true)} />
           )}
         </div>
       </ThemeProvider>
