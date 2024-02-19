@@ -2,13 +2,14 @@ import React from "react";
 import { Box, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
-import Header from "../../components/Header";
+import {  mockDatalisteLivreur } from "../../data/mockData";
+ import Header from "../../components/Header";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTheme } from "@mui/material";
 
-const Contacts = () => {
+
+const ListeLivreur = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -79,7 +80,7 @@ const Contacts = () => {
 
   return (
     <Box m="20px">
-      <Header title="CONTACTS" />
+      <Header title="Liste Livreurs" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -113,7 +114,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={mockDatalisteLivreur}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
@@ -122,4 +123,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default ListeLivreur;
