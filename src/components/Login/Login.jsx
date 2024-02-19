@@ -75,17 +75,18 @@ const Login = ({ onLogin }) => {
               </p>
             </div>
             <button
-              className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline wider-button"
+              style={{ width: '40%'}} 
               type="button"
               onClick={handleLogin}
             >
               Connexion
             </button>
             <div className="mt-4">
-              <p>
-                Vous n’avez pas de compte{' '}
+             <p style={{ color: 'black' }}>
+                Vous n’avez pas de compte?{' '}
                 <span className="cursor-pointer text-blue-500" onClick={() => setFormMode('signin')}>
-                  <Link> Register</Link>
+                <Link> Register</Link>
                 </span>
               </p>
             </div>
@@ -161,16 +162,19 @@ const Login = ({ onLogin }) => {
             <button
               className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
+              style={{ width: '40%'}} 
             >
               S'inscrire
             </button>
             <div className="mt-4">
-              <p>
-                Vous avez déjà un compte ?{' '}
-                <Link to="/Login" className="text-blue-500 hover:underline">
-                  Connectez-vous
-                </Link>
-              </p>
+            {formMode !== 'login' && (
+                <p style={{ color: 'black' }}>
+                  Vous avez déjà un compte ?{' '}
+                  <span className="cursor-pointer text-blue-500" onClick={() => setFormMode('login')}>
+                    <Link>Connectez-vous</Link>
+                  </span>
+                </p>
+              )}
             </div>
           </form>
         )}
