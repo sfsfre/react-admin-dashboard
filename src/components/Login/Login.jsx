@@ -84,7 +84,7 @@ const Login = ({ onLogin }) => {
             </button>
             <div className="mt-4">
              <p style={{ color: 'black' }}>
-                Vous n’avez pas de compte?{' '}
+                Vous n’avez pas de compte ?{' '}
                 <span className="cursor-pointer text-blue-500" onClick={() => setFormMode('signin')}>
                 <Link> Register</Link>
                 </span>
