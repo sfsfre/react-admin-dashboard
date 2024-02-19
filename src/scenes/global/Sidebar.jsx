@@ -167,7 +167,7 @@ const Sidebar = () => {
             
           </Typography>
            <Item
-            title="Livreur "
+            title="Gérer Livreur "
             to="/listeLivreur"
             icon={<DeliveryDiningIcon />}
             selected={selected}

@@ -50,7 +50,7 @@ const Liste = () => {
   };
 
   const columns = [
-    { field: "id", headerName: "id" },
+    { field: "id", headerName: "Matricule" },
     {
       field: "nom",
       headerName: "Nom Resto",
@@ -116,7 +116,7 @@ const Liste = () => {
                
                  // Désactive le bouton pendant la soumission
               >
-               <Button variant="contained" color="success"> Ajouter un Resto </Button>
+               <Button variant="contained" color="success"> Ajouter Resto </Button>
               </Link>
             </Box>
       <Box

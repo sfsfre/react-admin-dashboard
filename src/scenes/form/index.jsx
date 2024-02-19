@@ -52,7 +52,7 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="string"
-                label="id"
+                label="Matricule"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.id}
@@ -162,7 +162,7 @@ const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const checkoutSchema = yup.object().shape({
-  id: yup.string().required("id non valide"),
+  id: yup.string().required("Matricule non valide"),
   nom: yup.string().required("nom non valide"),
   email: yup.string().email("email non valide").required("required"),
   téléphone: yup
