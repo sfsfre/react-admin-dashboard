@@ -3,7 +3,7 @@
 //  import Header from "../../components/charts/Header";
 
 
-//  const DashboardRes = () => {
+//  const PageResto = () => {
 //   const colors = tokens(themeSettings.palette.mode);
     
 //      return (
@@ -35,4 +35,4 @@
 //         };
 
 
-//         export default DashboardRes;
+//         export default PageResto;

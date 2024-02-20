@@ -17,7 +17,10 @@ import Calendar from "./scenes/calendar/calendar";
 import Liste from "./scenes/listeResto";
 import ListeLivreur from "./scenes/listeLivreur";
 import Login from "./components/Login/Login";
-import DashboardRes from "./scenes/DashbordResto/index";
+import PageResto from "./scenes/PageResto/index";
+import Profile from "./scenes/profile/Profile";
+import { UserProvider } from './context/UserContext';
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -28,6 +31,8 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <UserProvider>
+    </UserProvider>
 
         {isAuthenticated ? (
           <div className="app">
@@ -42,12 +47,13 @@ function App() {
                 <Route path="/listeLivreur" element={<ListeLivreur />} />
                 <Route path="/form" element={<Form />} />
                 <Route path="/bar" element={<Bar />} />
-                <Route path="/DashboardResto" element={<DashboardRes />} />
+                <Route path="/PageResto" element={<PageResto />} />
                 <Route path="/pie" element={<Pie />} />
                 <Route path="/line" element={<Line />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/geography" element={<Geography />} />
+                <Route path="/Profile" element={<Profile />} />
                 <Route path="/*" element={<Navigate to="/" />} />
               </Routes>
             </main>

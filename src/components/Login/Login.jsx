@@ -4,6 +4,7 @@ import { FaUser, FaLock } from 'react-icons/fa';
 // import Background from "../background/Design sans titre (1).png"
 import './style.css';
 
+
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const Login = ({ onLogin }) => {
   const [passwordRegister, setPasswordReg] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  
   const handleLogin = () => {
     if (email === 'yourEmail@example.com' && password === 'yourPassword') {
       onLogin();
