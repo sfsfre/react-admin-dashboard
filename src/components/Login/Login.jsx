@@ -71,7 +71,7 @@ const Login = ({ onLogin }) => {
                 <span className="text-sm">Se rappeler de moi</span>
               </label>
               <p className="text-xs">
-                <Link to="/Register" className="text-blue-500 hover:underline">
+                <Link to="/CheckEmail" className="text-blue-500 hover:underline">
                   Mot de passe oublié ?
                 </Link>
               </p>

@@ -19,8 +19,9 @@ import ListeLivreur from "./scenes/listeLivreur";
 import Login from "./components/Login/Login";
 import PageResto from "./scenes/PageResto/index";
 import Profile from "./scenes/profile/Profile";
+import CheckEmail from "./scenes/resetPassword/CheckEmail";
+import ResetPassword from "./scenes/resetPassword/ResetPassword";
 import { UserProvider } from './context/UserContext';
-
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -32,35 +33,40 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <UserProvider>
-    </UserProvider>
-
-        {isAuthenticated ? (
-          <div className="app">
-            <Sidebar isSidebar={isSidebar} />
-            <main className="content">
-              <Topbar setIsSidebar={setIsSidebar} />
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/team" element={<Team />} />
-                <Route path="/contacts" element={<Contacts />} />
-                <Route path="/listeResto" element={<Liste />} />
-                <Route path="/listeLivreur" element={<ListeLivreur />} />
-                <Route path="/form" element={<Form />} />
-                <Route path="/bar" element={<Bar />} />
-                <Route path="/PageResto" element={<PageResto />} />
-                <Route path="/pie" element={<Pie />} />
-                <Route path="/line" element={<Line />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/calendar" element={<Calendar />} />
+          {isAuthenticated ? (
+            <div className="app">
+              <Sidebar isSidebar={isSidebar} />
+              <main className="content">
+                <Topbar setIsSidebar={setIsSidebar} />
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/listeResto" element={<Liste />} />
+                  <Route path="/listeLivreur" element={<ListeLivreur />} />
+                  <Route path="/form" element={<Form />} />
+                  <Route path="/bar" element={<Bar />} />
+                  <Route path="/PageResto" element={<PageResto />} />
+                  <Route path="/pie" element={<Pie />} />
+                  <Route path="/line" element={<Line />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/calendar" element={<Calendar />} />
                 <Route path="/geography" element={<Geography />} />
                 <Route path="/Profile" element={<Profile />} />
                 <Route path="/*" element={<Navigate to="/" />} />
+                </Routes>
+              </main>
+            </div>
+          ) : (
+            <>
+              <Routes>
+                <Route path="/ResetPassword" element={<ResetPassword />} />
+                <Route path="/CheckEmail" element={<CheckEmail />} />
+                <Route path="/*" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
               </Routes>
-            </main>
-          </div>
-        ) : (
-          <Login onLogin={() => setIsAuthenticated(true)} />
-        )}
+            </>
+          )}
+        </UserProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
