@@ -2,63 +2,68 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
+import '../../components/Login/style.css'; // Assurez-vous d'importer le même fichier style.css utilisé pour le formulaire de connexion
 
 const ResetPassword = () => {
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [nouveauMotDePasse, setNouveauMotDePasse] = useState('');
+  const [confirmerMotDePasse, setConfirmerMotDePasse] = useState('');
 
   const handleResetPassword = () => {
-    // Implement your reset password logic here
-    console.log('Resetting password...');
+    // Implémentez votre logique de réinitialisation du mot de passe ici
+    console.log('Réinitialisation du mot de passe...');
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-800">
-      <div style={{ width: '30%' }}>
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Reset Password</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+         <div className="w-full max-w-md">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto my-auto">
+      <div style={{ width: '100%' }}>
+        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Réinitialiser le mot de passe</h2>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="newPassword">
-            New Password
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nouveauMotDePasse">
+            Nouveau Mot de Passe
           </label>
           <div className="relative">
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="newPassword"
+              id="nouveauMotDePasse"
               type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Nouveau Mot de Passe"
+              value={nouveauMotDePasse}
+              onChange={(e) => setNouveauMotDePasse(e.target.value)}
             />
-            <FaLock className="absolute text-gray-500 right-2 top-3" />
+            <FaLock className="absolute text-gray-700 right-2 top-3" />
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
-            Confirm Password
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmerMotDePasse">
+            Confirmer le Mot de Passe
           </label>
           <div className="relative">
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="confirmPassword"
+              id="confirmerMotDePasse"
               type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirmer le Mot de Passe"
+              value={confirmerMotDePasse}
+              onChange={(e) => setConfirmerMotDePasse(e.target.value)}
             />
             <FaLock className="absolute text-gray-500 right-2 top-3" />
           </div>
         </div>
         <Link to="/Login">
-        <button
-          className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline wider-button"
-          style={{ width: '40%' }}
-          type="button"
-          onClick={handleResetPassword}
-        >
-          Reset Password
-        </button>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline wider-button"
+            style={{ width: '50%' }}
+            type="button"
+            onClick={handleResetPassword}
+          >
+            Réinitialiser le Mot de Passe
+          </button>
         </Link>
       </div>
+      </form>
+    </div>
     </div>
   );
 };

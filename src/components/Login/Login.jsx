@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
-// import Background from "../background/Design sans titre (1).png"
 import './style.css';
 
 

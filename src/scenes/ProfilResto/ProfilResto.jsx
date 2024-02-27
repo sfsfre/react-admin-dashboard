@@ -13,17 +13,16 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Close } from '@mui/icons-material'; // Assurez-vous d'importer Close depuis les icônes MUI
 
-const Profile = () => {
+const ProfilResto = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfileData, setEditedProfileData] = useState({
-    
-    firstName: 'Foulen',
-    lastName: 'Ben Foulen',
-    email: 'foulen.benfoulen@example.com',
+
+    firstName: 'nom resto',
+    email: 'restaurent@example.com',
     region: 'Sousse',
     address: '4060, Kalaa Kébira',
-    phoneNumber: '+216 5352 6482',
+    phoneNumber: '+216 73258469',
   });
 
   const handleEdit = () => {
@@ -38,12 +37,11 @@ const Profile = () => {
   const handleCancel = () => {
     // Reset the edited profile data and exit edit mode
     setEditedProfileData({
-      firstName: 'Foulen',
-      lastName: 'Ben Foulen',
-      email: 'foulen.benfoulen@example.com',
+      firstName: 'nom resto',
+      email: 'restaurent@example.com',
       region: 'Sousse',
       address: '4060, Kalaa Kébira',
-      phoneNumber: '+216 5352 6482',
+      phoneNumber: '+216 73258469',
     });
     setIsEditing(false);
   };
@@ -54,7 +52,7 @@ const Profile = () => {
   };
 
   const handleClose = () => {
-    navigate('/dashboard');
+    navigate('/PageResto');
   };
 
   return (
@@ -71,10 +69,10 @@ const Profile = () => {
             </IconButton>
             <Box p={4}>
               <Avatar
-                alt="profile-user"
+                alt="resto"
                 width="400px"
                 height="400px"
-                src={`../../assets/USER.PNG`}
+                src={`../../assets/resto.png`}
                 sx={{ width: 160, height: 160, margin: '0 auto' }}
               />
               {isEditing ? (
@@ -88,14 +86,7 @@ const Profile = () => {
                     fullWidth
                     margin="normal"
                   />
-                  <TextField
-                    label="Last Name"
-                    name="lastName"
-                    value={editedProfileData.lastName}
-                    onChange={handleInputChange}
-                    fullWidth
-                    margin="normal"
-                  />
+                 
                   <TextField
                     label="Email"
                     name="email"
@@ -137,11 +128,7 @@ const Profile = () => {
                     Nom: {editedProfileData.firstName}
                   </Typography>
                   <Divider />
-                  <Typography variant="h5" my={2}>
-                    Prénom: {editedProfileData.lastName}
-                  </Typography>
-                  <Divider />
-                  <Typography variant="h5" my={2}>
+                 <Typography variant="h5" my={2}>
                     Email: {editedProfileData.email}
                   </Typography>
                   <Divider />
@@ -183,4 +170,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilResto;

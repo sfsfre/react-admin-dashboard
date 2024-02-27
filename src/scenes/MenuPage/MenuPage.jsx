@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -16,30 +16,23 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Typography,
 } from "@mui/material";
 import { AddCircleOutline, Delete, Edit, Search } from "@mui/icons-material";
-import Header from '../../components/Header';
+import Header from "../../components/Header";
 
-
-
-const initialResto = [
-  {
-    id: 1,
-    nom: "Miam's",
-    email: "miamsSousse@gmail.com",
-    contact: "(216)52323073",
-    city: "Hammem sousse",
-    address: "Route de la plage hammem sousse,4050",
-    date: new Date().toLocaleDateString(),
-  },
+const initialMenu = [
+  { id: 1, category: "Pizza", subcategory: "Pizza Margherita", price: 10.99, quantity: 50 },
+  { id: 2, category: "Pasta", subcategory: "Pasta Carbonara", price: 8.99, quantity: 100 },
+  // ... other initial menu items
 ];
 
-const Liste = () => {
-
-  const [listeResto, setListeResto] = useState(initialResto); 
+const MenuPage = () => {
+  const [menu, setMenu] = useState(initialMenu);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleAddClick = () => {
     setDialogOpen(true);
@@ -52,16 +45,16 @@ const Liste = () => {
   };
 
   const handleDeleteClick = (id) => {
-    setListeResto(listeResto.filter((item) => item.id !== id));  // Utiliser le nom correct
+    setMenu(menu.filter((item) => item.id !== id));
   };
 
   const handleSave = (newItem) => {
     if (selectedItem.id) {
       // Editing existing item
-      setListeResto(listeResto.map((item) => (item.id === selectedItem.id ? newItem : item)));
+      setMenu(menu.map((item) => (item.id === selectedItem.id ? newItem : item)));
     } else {
       // Adding new item
-      setListeResto([...listeResto, { ...newItem, id: Date.now() }]);
+      setMenu([...menu, { ...newItem, id: Date.now() }]);
     }
     setDialogOpen(false);
   };
@@ -69,19 +62,28 @@ const Liste = () => {
   const handleSearch = () => {
     // Perform search logic based on the searchTerm
     // For simplicity, this example filters menu items containing the searchTerm in their name
-    const filteredResto = listeResto.filter((item) =>
-      item.nom.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredMenu = initialMenu.filter((item) =>
+      item.subcategory.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setListeResto(filteredResto);
+    setMenu(filteredMenu);
   };
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
   };
 
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleAddSubcategory = () => {
+    setDialogOpen(true);
+    setSelectedItem({ category: selectedCategory, subcategory: "" });
+  };
+
   return (
     <Box m="20px">
-      <Header title="Liste " subtitle="Liste des Restaurents" />
+      <Header title="Page Menu" subtitle="Gérer le Menu" />
       <Box
         display="flex"
         justifyContent="space-between"
@@ -91,7 +93,7 @@ const Liste = () => {
       >
         <Box mb={{ xs: 2, sm: 0 }}>
           <TextField
-            label="Rechercher un Restaurent"
+            label="Rechercher un repas"
             variant="outlined"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -113,7 +115,7 @@ const Liste = () => {
             startIcon={<AddCircleOutline />}
             onClick={handleAddClick}
           >
-            Ajouter un Restaurent
+            Ajouter un Repas
           </Button>
         </Box>
       </Box>
@@ -121,26 +123,23 @@ const Liste = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Matricule </TableCell>
-              <TableCell>Nom Resto</TableCell>
-              <TableCell>Téléphone</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Région</TableCell>
-              <TableCell>Addresse</TableCell>
-              <TableCell>Date D'inscription</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell>Catégorie</TableCell>
+              <TableCell>Sous-Catégorie</TableCell>
+              <TableCell>Prix</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {listeResto.map((item) => (
+            {menu.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.nom}</TableCell>
-                <TableCell>{item.contact}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.city}</TableCell>
-                <TableCell>{item.address}</TableCell>
-                <TableCell>{item.date}</TableCell>
+                <TableCell>
+                  <Button onClick={() => handleCategoryClick(item.category)}>
+                    {item.category}
+                  </Button>
+                </TableCell>
+                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.subcategory}</TableCell>
+                <TableCell>{item.price}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => handleEditClick(item)}>
                     <Edit />
@@ -154,57 +153,46 @@ const Liste = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      {selectedCategory && (
+        <Box mt={2}>
+          <Button variant="contained" color="primary" onClick={handleAddSubcategory}>
+            Ajouter une Sous-Catégorie à {selectedCategory}
+          </Button>
+        </Box>
+      )}
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle>{selectedItem.id ? "Modifier Restaurent" : "Ajouter Restaurent"}</DialogTitle>
+        <DialogTitle>{selectedItem.id ? "Modifier Repas" : "Ajouter Repas"}</DialogTitle>
         <DialogContent>
-          <TextField
-            label="Nom Resto"
+          {selectedItem.category && (
+            <Typography variant="subtitle1" color="textSecondary">
+              Catégorie: {selectedItem.category}
+            </Typography>
+          )}
+           <TextField
+            label="Catégorie"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={selectedItem.nom || ""}
-            onChange={(e) => setSelectedItem({ ...selectedItem, nom: e.target.value })}
+            value={selectedItem.category || ""}
+            onChange={(e) => setSelectedItem({ ...selectedItem, category: e.target.value })}
           />
           <TextField
-            label="Téléphone"
+            label="Sous-Catégorie"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={selectedItem.contact || ""}
-            onChange={(e) => setSelectedItem({ ...selectedItem, contact: e.target.value })}
+            value={selectedItem.subcategory || ""}
+            onChange={(e) => setSelectedItem({ ...selectedItem, subcategory: e.target.value })}
           />
           <TextField
-            label="Email"
+            label="Prix"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={selectedItem.email || ""}
-            onChange={(e) => setSelectedItem({ ...selectedItem, email: e.target.value })}
+            value={selectedItem.price || ""}
+            onChange={(e) => setSelectedItem({ ...selectedItem, price: e.target.value })}
           />
-          <TextField
-            label="Région"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={selectedItem.city || ""}
-            onChange={(e) => setSelectedItem({ ...selectedItem, city: e.target.value })}
-          />
-          <TextField
-            label="Adresse"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={selectedItem.address || ""}
-            onChange={(e) => setSelectedItem({ ...selectedItem, address: e.target.value })}
-          />
-          <TextField
-            label="Date d'inscription"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={selectedItem.date || ""}
-            onChange={(e) => setSelectedItem({ ...selectedItem, date: e.target.value })}
-          />
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Annuler</Button>
@@ -217,4 +205,4 @@ const Liste = () => {
   );
 };
 
-export default Liste;
+export default MenuPage;

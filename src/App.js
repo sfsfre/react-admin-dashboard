@@ -16,12 +16,15 @@ import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Liste from "./scenes/listeResto";
 import ListeLivreur from "./scenes/listeLivreur";
+import ProfilResto from "./scenes/ProfilResto/ProfilResto";
 import Login from "./components/Login/Login";
 import PageResto from "./scenes/PageResto/index";
 import Profile from "./scenes/profile/Profile";
 import CheckEmail from "./scenes/resetPassword/CheckEmail";
 import ResetPassword from "./scenes/resetPassword/ResetPassword";
+import MenuPage from "./scenes/MenuPage/MenuPage";
 import { UserProvider } from './context/UserContext';
+import Suivre from "./scenes/SuivreCde/Suivre";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -52,7 +55,11 @@ function App() {
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/calendar" element={<Calendar />} />
                 <Route path="/geography" element={<Geography />} />
-                <Route path="/Profile" element={<Profile />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/MenuPage" element={<MenuPage/>}/>
+                <Route path="/ProfilResto" element={<ProfilResto />} />
+                <Route path="/SuivreCde" element={<Suivre />} />
+
                 <Route path="/*" element={<Navigate to="/" />} />
                 </Routes>
               </main>

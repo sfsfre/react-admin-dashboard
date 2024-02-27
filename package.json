@@ -38,6 +38,7 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
+  
   "scripts": {
     "build:css": "tailwindcss build src/tailwind.css -o src/styles.css",
     "start": "cross-env PORT=5000 react-scripts start",
