@@ -17,7 +17,6 @@ import {
 } from '@mui/material';
 import Header from "../../components/Header";
 
-
 const initialOrders = [
   { id: 1, status: 'En cours', items: ['Pizza', 'Salad'], total: 25.99 },
   { id: 2, status: 'Prêt à être livré', items: ['Burger', 'Fries'], total: 18.49 },
@@ -30,6 +29,12 @@ const Suivre = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleTrackClick = (order) => {
+    // Suppose you want to update the status of the selected order
+    const updatedOrders = orders.map((o) =>
+      o.id === order.id ? { ...o, status: 'En cours de livraison' } : o
+    );
+
+    setOrders(updatedOrders);
     setSelectedOrder(order);
     setDialogOpen(true);
   };
@@ -40,7 +45,7 @@ const Suivre = () => {
 
   return (
     <Box m="20px">
-    <Header title="Suivre Commande "  />
+      <Header title="Suivre Commande " />
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

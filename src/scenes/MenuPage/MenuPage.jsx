@@ -22,8 +22,10 @@ import { AddCircleOutline, Delete, Edit, Search } from "@mui/icons-material";
 import Header from "../../components/Header";
 
 const initialMenu = [
-  { id: 1, category: "Pizza", subcategory: "Pizza Margherita", price: 10.99, quantity: 50 },
-  { id: 2, category: "Pasta", subcategory: "Pasta Carbonara", price: 8.99, quantity: 100 },
+  { id: 2, category: "Pasta", subcategory: "Pasta Carbonara", price: 8.99 },
+  { id: 3, category: "Pasta", subcategory: "Pasta Bolognese", price: 9.99 },
+  { id: 4, category: "Pizza", subcategory: "Pizza Margherita", price: 7.99},
+  { id: 5, category: "Pizza", subcategory: "Pizza Pepperoni", price: 10.99 },
   // ... other initial menu items
 ];
 
@@ -50,18 +52,14 @@ const MenuPage = () => {
 
   const handleSave = (newItem) => {
     if (selectedItem.id) {
-      // Editing existing item
       setMenu(menu.map((item) => (item.id === selectedItem.id ? newItem : item)));
     } else {
-      // Adding new item
       setMenu([...menu, { ...newItem, id: Date.now() }]);
     }
     setDialogOpen(false);
   };
 
   const handleSearch = () => {
-    // Perform search logic based on the searchTerm
-    // For simplicity, this example filters menu items containing the searchTerm in their name
     const filteredMenu = initialMenu.filter((item) =>
       item.subcategory.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -80,6 +78,18 @@ const MenuPage = () => {
     setDialogOpen(true);
     setSelectedItem({ category: selectedCategory, subcategory: "" });
   };
+
+  const transformedMenu = menu.reduce((acc, item) => {
+    const existingItem = acc.find((accItem) => accItem.category === item.category);
+
+    if (existingItem) {
+      existingItem.subcategoryArray.push(item.subcategory);
+    } else {
+      acc.push({ ...item, subcategoryArray: [item.subcategory] });
+    }
+
+    return acc;
+  }, []);
 
   return (
     <Box m="20px">
@@ -130,36 +140,53 @@ const MenuPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {menu.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>
-                  <Button onClick={() => handleCategoryClick(item.category)}>
-                    {item.category}
-                  </Button>
-                </TableCell>
-                <TableCell>{item.category}</TableCell>
-                <TableCell>{item.subcategory}</TableCell>
-                <TableCell>{item.price}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleEditClick(item)}>
-                    <Edit />
-                  </IconButton>
-                  <IconButton onClick={() => handleDeleteClick(item.id)}>
-                    <Delete />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+            {transformedMenu.map((item) => (
+              <React.Fragment key={item.id}>
+                <TableRow>
+                  <TableCell>
+                    <Button onClick={() => handleCategoryClick(item.category)}>
+                      {item.category}
+                    </Button>
+                    {selectedCategory === item.category && (
+                      <Box mt={2}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleAddSubcategory}
+                        >
+                          Ajouter une Sous-Catégorie à {selectedCategory}
+                        </Button>
+                      </Box>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {item.subcategoryArray.map((subcat, index) => (
+                      <div key={index}>{subcat}</div>
+                    ))}
+                  </TableCell>
+                  <TableCell>
+                    {item.subcategoryArray.map((subcat, index) => (
+                      <div key={index}>{item.price} dt</div>
+                    ))}
+                  </TableCell>
+                  <TableCell>
+                    {item.subcategoryArray.map((subcat, index) => (
+                      <div key={index}>
+                        <IconButton onClick={() => handleEditClick(item)}>
+                          <Edit />
+                        </IconButton>
+                        <IconButton onClick={() => handleDeleteClick(item.id)}>
+                          <Delete />
+                        </IconButton>
+                      </div>
+                    ))}
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      {selectedCategory && (
-        <Box mt={2}>
-          <Button variant="contained" color="primary" onClick={handleAddSubcategory}>
-            Ajouter une Sous-Catégorie à {selectedCategory}
-          </Button>
-        </Box>
-      )}
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
         <DialogTitle>{selectedItem.id ? "Modifier Repas" : "Ajouter Repas"}</DialogTitle>
         <DialogContent>
@@ -168,7 +195,7 @@ const MenuPage = () => {
               Catégorie: {selectedItem.category}
             </Typography>
           )}
-           <TextField
+          <TextField
             label="Catégorie"
             variant="outlined"
             fullWidth
@@ -192,7 +219,6 @@ const MenuPage = () => {
             value={selectedItem.price || ""}
             onChange={(e) => setSelectedItem({ ...selectedItem, price: e.target.value })}
           />
-          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Annuler</Button>
