@@ -140,51 +140,52 @@ const MenuPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {transformedMenu.map((item) => (
-              <React.Fragment key={item.id}>
-                <TableRow>
-                  <TableCell>
-                    <Button onClick={() => handleCategoryClick(item.category)}>
-                      {item.category}
-                    </Button>
-                    {selectedCategory === item.category && (
-                      <Box mt={2}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={handleAddSubcategory}
-                        >
-                          Ajouter une Sous-Catégorie à {selectedCategory}
-                        </Button>
-                      </Box>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {item.subcategoryArray.map((subcat, index) => (
-                      <div key={index}>{subcat}</div>
-                    ))}
-                  </TableCell>
-                  <TableCell>
-                    {item.subcategoryArray.map((index) => (
-                      <div key={index}>{item.price} dt</div>
-                    ))}
-                  </TableCell>
-                  <TableCell>
-                    {item.subcategoryArray.map((index) => (
-                      <div key={index}>
-                        <IconButton  color="success" onClick={() => handleEditClick(item)}>
-                          <Edit />
-                        </IconButton>
-                        <IconButton  color="error" onClick={() => handleDeleteClick(item.id)}>
-                          <Delete />
-                        </IconButton>
-                      </div>
-                    ))}
-                  </TableCell>
-                </TableRow>
-              </React.Fragment>
-            ))}
-          </TableBody>
+  {transformedMenu.map((item, index) => (
+    <React.Fragment key={item.id}>
+      <TableRow className={`mb-4`}>
+        <TableCell>
+          <Button onClick={() => handleCategoryClick(item.category)}>
+            {item.category}
+          </Button>
+          {selectedCategory === item.category && (
+            <Box mt={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddSubcategory}
+              >
+                Ajouter une Sous-Catégorie à {selectedCategory}
+              </Button>
+            </Box>
+          )}
+        </TableCell>
+        <TableCell>
+          {item.subcategoryArray.map((subcat, index) => (
+            <div key={index}>{subcat}</div>
+          ))}
+        </TableCell>
+        <TableCell>
+          {item.subcategoryArray.map((index) => (
+            <div key={index}>{item.price} dt</div>
+          ))}
+        </TableCell>
+        <TableCell>
+          {item.subcategoryArray.map((index) => (
+            <div key={index}>
+              <IconButton  color="success" onClick={() => handleEditClick(item)}>
+                <Edit />
+              </IconButton>
+              <IconButton  color="error" onClick={() => handleDeleteClick(item.id)}>
+                <Delete />
+              </IconButton>
+            </div>
+          ))}
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  ))}
+</TableBody>
+
         </Table>
       </TableContainer>
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
