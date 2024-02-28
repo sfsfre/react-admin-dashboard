@@ -165,17 +165,17 @@ const MenuPage = () => {
                     ))}
                   </TableCell>
                   <TableCell>
-                    {item.subcategoryArray.map((subcat, index) => (
+                    {item.subcategoryArray.map((index) => (
                       <div key={index}>{item.price} dt</div>
                     ))}
                   </TableCell>
                   <TableCell>
-                    {item.subcategoryArray.map((subcat, index) => (
+                    {item.subcategoryArray.map((index) => (
                       <div key={index}>
-                        <IconButton onClick={() => handleEditClick(item)}>
+                        <IconButton  color="success" onClick={() => handleEditClick(item)}>
                           <Edit />
                         </IconButton>
-                        <IconButton onClick={() => handleDeleteClick(item.id)}>
+                        <IconButton  color="error" onClick={() => handleDeleteClick(item.id)}>
                           <Delete />
                         </IconButton>
                       </div>

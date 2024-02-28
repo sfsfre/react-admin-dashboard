@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -40,7 +39,7 @@ const Sidebar = ({ role = "resto" }) => {
   const navigate = useNavigate();
 
   const handleImageClick = () => {
-    role === 'admin' ? navigate('/Profile') : navigate ('/ProfilResto'); // Assurez-vous de la casse ici
+    role === 'admin' ? navigate('/Profile') : navigate ('/ProfilResto');
   };
 
   const adminItems = [
@@ -48,7 +47,7 @@ const Sidebar = ({ role = "resto" }) => {
     { title: "Gérer Consommateurs", to: "/contacts", icon: <SupervisorAccountIcon /> },
     { title: "Gérer Restaurants", to: "/listeResto", icon: <RestaurantIcon /> },
     { title: "Gérer Livreur", to: "/listeLivreur", icon: <DeliveryDiningIcon /> },
-    { title: "Paramètre", to: "/", icon: <SettingsOutlinedIcon /> },
+
   ];
 
   const restoItems = [
@@ -56,7 +55,7 @@ const Sidebar = ({ role = "resto" }) => {
     { title: "Gérer Menu", to: "/MenuPage", icon: <RestaurantMenuOutlinedIcon /> },
     { title: "Suivre les Commandes", to: "/SuivreCde", icon: <PlaylistAddCheckSharpIcon /> },
     { title: "Gérer Livreur", to: "/listeLivreur", icon: <DeliveryDiningIcon /> },
-    { title: "Paramètre", to: "/", icon: <SettingsOutlinedIcon /> },
+
   ];
 
   const items = role === 'admin' ? adminItems : restoItems;
@@ -64,10 +63,11 @@ const Sidebar = ({ role = "resto" }) => {
   return (
     <div>
       <Box
-        sx={{
-          "& .pro-sidebar-inner": {
-            background: `${colors.primary[400]} !important`,
-          },
+       sx={{
+        height: "145vh", // Set the height to 100% of the viewport height
+        "& .pro-sidebar-inner": {
+          background: `${colors.primary[400]} !important`,
+        },
           "& .pro-icon-wrapper": {
             backgroundColor: "transparent !important",
           },

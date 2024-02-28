@@ -60,7 +60,7 @@ const ListeLivreur = () => {
       renderCell: (params) => (
         <Box>
           <IconButton
-            color="scondary"
+             color="success"
             aria-label="modifier"
             onClick={() => handleEdit(params.id)}
           >
